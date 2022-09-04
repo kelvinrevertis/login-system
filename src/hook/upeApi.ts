@@ -12,7 +12,7 @@ export const useApi=()=>({
         return{
             user: {id: 3, name: 'Kelvin', email: 'kelvin@email.com'},
             token:'123456789'
-        }
+        }//fake "API"
         const response = await api.post('/signin',{email, password})
         return response.data
     },
