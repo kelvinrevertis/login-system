@@ -11,6 +11,7 @@ import { AuthContext } from "./AuthContext"
             const data = await api.signin(email,password)
             if(data.user && data.token){
                 setUser(data.user)
+                setToken(data.token)
                 return true
             }
             return false
@@ -20,6 +21,10 @@ import { AuthContext } from "./AuthContext"
         const signout =async()=>{
             await api.logout()
             setUser(null)
+        }
+
+        const setToken = (token: string)=>{
+            localStorage.setItem('authToken', token)
         }
     return(
         <AuthContext.Provider value={{user, signin, signout}}>
