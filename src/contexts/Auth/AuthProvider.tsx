@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useApi } from '../../hook/upeApi'
 import { User } from "../../types/User"
 import { AuthContext } from "./AuthContext"
@@ -6,6 +6,15 @@ import { AuthContext } from "./AuthContext"
     export const AuthProvider = ({children}: {children: JSX.Element})=>{
         const[user, setUser] = useState<User | null>(null)
         const api = useApi()
+
+        useEffect(()=>{
+            const validateToken = () =>{
+                const storageData = localStorage.getItem('authToken')
+                if(storageData){
+                    
+                }
+            }
+        })
 
         const signin = async (email: string, password: string)=>{
             const data = await api.signin(email,password)
