@@ -1,18 +1,17 @@
-import './App.css';
-import { Route, Routes, Link, useNavigate } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { Private } from './pages/Private';
-import { RequireAuth } from './contexts/Auth/RequireAuth';
-import { useContext } from 'react';
-import { AuthContext } from './contexts/Auth/AuthContext';
+import './App.css'
+import { Route, Routes, Link, useNavigate } from 'react-router-dom'
+import { Home } from './pages/Home'
+import { Private } from './pages/Private'
+import { RequireAuth } from './contexts/Auth/RequireAuth'
+import { useContext } from 'react'
+import { AuthContext } from './contexts/Auth/AuthContext'
 
 function App() {
   const auth = useContext(AuthContext)
-  const navigate = useNavigate()
 
   const handleLogout = async () =>{
     await auth.signout()
-    navigate('/')
+    window.location.href = window.location.href
   }
 
   return (

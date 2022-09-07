@@ -1,4 +1,4 @@
-import { ChangeEvent,useContext, useState } from "react"
+import { ChangeEvent, useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/Auth/AuthContext"
 
@@ -10,11 +10,11 @@ export const Login = () =>{
     const [password, setPassword] = useState('')
 
     const handleEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
-        setEmail(event.target.value);
+        setEmail(event.target.value)
     }
 
     const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
+        setPassword(event.target.value)
     }
 
     const handleLogin = async () => {
