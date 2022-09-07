@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useApi } from '../../hook/upeApi'
+import { useApi } from '../../hook/useApi'
 import { User } from "../../types/User"
 import { AuthContext } from "./AuthContext"
 
@@ -7,29 +7,34 @@ import { AuthContext } from "./AuthContext"
         const[user, setUser] = useState<User | null>(null)
         const api = useApi()
 
-        useEffect(()=>{
-            const validateToken = () =>{
-                const storageData = localStorage.getItem('authToken')
-                if(storageData){
-                    
+    useEffect(() => {
+        const validateToken = async () => {
+            const storageData = localStorage.getItem('authToken')
+            if (storageData) {
+                const data = await api.validateToken(storageData)
+                if (data.user) {
+                    setUser(data.user)
                 }
             }
-        })
-
-        const signin = async (email: string, password: string)=>{
-            const data = await api.signin(email,password)
-            if(data.user && data.token){
-                setUser(data.user)
-                setToken(data.token)
-                return true
-            }
-            return false
-
         }
+        validateToken()
+    }, [api])
+        
+
+    const signin = async (email: string, password: string) => {
+        const data = await api.signin(email, password);
+        if (data.user && data.token) {
+            setUser(data.user);
+            setToken(data.token);
+            return true;
+        }
+        return false;
+    }
 
         const signout =async()=>{
             await api.logout()
             setUser(null)
+            setToken('')
         }
 
         const setToken = (token: string)=>{
